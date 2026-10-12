@@ -1,0 +1,13 @@
+# Catalogo de imagens: id=arquivo (uma linha por imagem)
+1=par-01.png
+2=par-02.png
+3=par-03.png
+4=par-04.png
+5=par-05.png
+6=par-06.png
+7=par-07.png
+8=par-08.png
+9=par-09.png
+10=par-10.png
+11=par-11.png
+12=par-12.png

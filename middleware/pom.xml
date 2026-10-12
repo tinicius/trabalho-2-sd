@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>br.cefet.sd</groupId>
+    <artifactId>memoria-rmi-pai</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>middleware</artifactId>
+  <packaging>jar</packaging>
+  <name>Jogo da Memoria - Middleware</name>
+  <description>Servidor RMI (salas, partidas, entrega de eventos). Depende somente de comum.</description>
+
+  <dependencies>
+    <!-- Unica dependencia interna: middleware NAO depende de cliente -->
+    <dependency>
+      <groupId>br.cefet.sd</groupId>
+      <artifactId>comum</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- O shade substitui o artefato principal; o jar final e target/middleware-all.jar -->
+    <finalName>middleware-all</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>br.cefet.sd.memoria.middleware.Principal</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

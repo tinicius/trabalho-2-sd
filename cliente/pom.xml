@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>br.cefet.sd</groupId>
+    <artifactId>memoria-rmi-pai</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>cliente</artifactId>
+  <packaging>jar</packaging>
+  <name>Jogo da Memoria - Cliente</name>
+  <description>Cliente Swing e utilitario de carga. Depende somente de comum.</description>
+
+  <dependencies>
+    <!-- Unica dependencia interna: cliente NAO depende de middleware -->
+    <dependency>
+      <groupId>br.cefet.sd</groupId>
+      <artifactId>comum</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- O shade substitui o artefato principal; o jar final e target/cliente-all.jar -->
+    <finalName>cliente-all</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>br.cefet.sd.memoria.cliente.Principal</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
